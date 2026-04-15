@@ -1,0 +1,22 @@
+/* Make entire phone input full width */
+.PhoneInput {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+/* Make number input fill remaining space */
+.PhoneInputInput {
+  flex: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  font-size: 14px;
+}
+
+/* Remove internal focus styles */
+.PhoneInputInput:focus {
+  outline: none !important;
+}

@@ -1,0 +1,280 @@
+src/
+ ├── app/
+ │    └── layout/
+ │         └── DashboardLayout.jsx
+ │
+ ├── components/
+ │    ├── layout/
+ │    │     ├── Sidebar.jsx
+ │    │     └── Header.jsx
+ │    │
+ │    ├── ui/
+ │    │     ├── Card.jsx
+ │    │     ├── DataTable.jsx
+ │    │     ├── StatCard.jsx
+ │    │     ├── Badge.jsx
+ │    │     └── Loader.jsx
+ │    │
+ │    ├── charts/
+ │    │     └── ChartRenderer.jsx
+ │
+ ├── config/
+ │    └── sidebar.config.js
+ │
+ ├── hooks/
+ │    └── useDashboard.js
+ │
+ ├── services/
+ │    └── dashboard.service.js
+ │
+ └── pages/
+      └── Dashboard.jsx
+
+
+
+
+
+
+
+
+
+
+
+
+src/
+│
+├── app/                    # App setup
+│   ├── App.jsx
+│   ├── routes.jsx
+│   └── store.js
+│
+├── assets/                 # Images, icons
+│
+├── components/             # Reusable shared components
+│   ├── ui/                 # Pure UI components
+│   ├── layout/             # Layout components
+│   ├── forms/              # Reusable form components
+│   └── feedback/           # Loader, Modal, Toast
+│
+├── features/               # Feature-based modules (IMPORTANT)
+│   ├── auth/
+│   │   ├── pages/
+│   │   ├── components/
+│   │   ├── auth.service.js
+│   │   └── useAuth.js
+│   │
+│   ├── users/
+│   ├── dashboard/
+│   ├── reports/
+│   └── audits/
+│
+├── services/               # Axios base config
+│   └── api.js
+│
+├── hooks/                  # Global reusable hooks
+│
+├── utils/                  # Helper functions
+│
+├── constants/              # Static values
+│
+├── context/                # Context providers (if needed)
+│
+└── styles/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+src/
+│
+├── app/                              # App bootstrap layer
+│   ├── App.jsx
+│   ├── routes.jsx
+│   ├── ProtectedRoute.jsx
+│   ├── RoleGuard.jsx
+│   └── store.js
+│
+├── assets/                           # Static files
+│   ├── images/
+│   ├── icons/
+│   └── logo.svg
+│
+├── components/                       # Pure reusable UI (NO business logic)
+│   ├── ui/
+│   │   ├── Button.jsx
+│   │   ├── Input.jsx
+│   │   ├── PasswordInput.jsx
+│   │   ├── Select.jsx
+│   │   ├── Table.jsx
+│   │   ├── Badge.jsx
+│   │   ├── Card.jsx
+│   │   └── Pagination.jsx
+│   │
+│   ├── layout/
+│   │   ├── PlatformLayout.jsx
+│   │   ├── TenantLayout.jsx
+│   │   ├── Sidebar.jsx
+│   │   ├── Header.jsx
+│   │   └── Footer.jsx
+│   │
+│   ├── forms/
+│   │   ├── FormWrapper.jsx
+│   │   └── FormField.jsx
+│   │
+│   └── feedback/
+│       ├── Loader.jsx
+│       ├── Modal.jsx
+│       ├── Toast.jsx
+│       └── ConfirmDialog.jsx
+│
+├── features/                         # 🔥 Feature-based architecture
+│
+│   ├── auth/                         # Authentication module
+│   │   ├── pages/
+│   │   │   ├── LoginPage.jsx
+│   │   │   ├── SignupPage.jsx
+│   │   │   ├── ForgotPassword.jsx
+│   │   │   └── ResetPassword.jsx
+│   │   │
+│   │   ├── components/
+│   │   │   ├── LoginForm.jsx
+│   │   │   ├── SignupForm.jsx
+│   │   │   └── OTPForm.jsx
+│   │   │
+│   │   ├── auth.service.js
+│   │   ├── useAuth.js
+│   │   └── auth.slice.js
+│
+│   ├── platform/                     # 🔥 PLATFORM (Super Admin Side)
+│   │
+│   │   ├── dashboard/
+│   │   │   ├── DashboardPage.jsx
+│   │   │   ├── dashboard.service.js
+│   │   │   └── dashboard.slice.js
+│   │   │
+│   │   ├── tenants/
+│   │   │   ├── pages/
+│   │   │   │   ├── TenantList.jsx
+│   │   │   │   ├── TenantDetails.jsx
+│   │   │   │   └── CreateTenant.jsx
+│   │   │   ├── tenant.service.js
+│   │   │   └── tenant.slice.js
+│   │   │
+│   │   ├── subscriptions/
+│   │   │   ├── pages/
+│   │   │   │   ├── Plans.jsx
+│   │   │   │   ├── PlanFeatures.jsx
+│   │   │   │   ├── TenantSubscriptions.jsx
+│   │   │   │   └── Billing.jsx
+│   │   │   ├── subscription.service.js
+│   │   │   └── subscription.slice.js
+│   │   │
+│   │   ├── platform-users/
+│   │   │   ├── pages/
+│   │   │   │   ├── PlatformUserList.jsx
+│   │   │   │   └── CreatePlatformUser.jsx
+│   │   │   ├── platformUser.service.js
+│   │   │   └── platformUser.slice.js
+│   │   │
+│   │   ├── roles/
+│   │   │   ├── pages/
+│   │   │   │   ├── RoleList.jsx
+│   │   │   │   └── PermissionMapping.jsx
+│   │   │   ├── role.service.js
+│   │   │   └── role.slice.js
+│   │   │
+│   │   ├── audit-logs/
+│   │   │   ├── AuditLogPage.jsx
+│   │   │   ├── audit.service.js
+│   │   │   └── audit.slice.js
+│   │   │
+│   │   └── reports/
+│   │       ├── RevenueReport.jsx
+│   │       ├── TenantGrowthReport.jsx
+│   │       └── report.service.js
+│
+│   ├── tenant/                       # 🔥 TENANT SIDE (Business App)
+│   │
+│   │   ├── dashboard/
+│   │   │   ├── DashboardPage.jsx
+│   │   │   ├── dashboard.service.js
+│   │   │   └── dashboard.slice.js
+│   │   │
+│   │   ├── users/
+│   │   │   ├── pages/
+│   │   │   │   ├── UserList.jsx
+│   │   │   │   ├── CreateUser.jsx
+│   │   │   │   └── UserDetails.jsx
+│   │   │   ├── user.service.js
+│   │   │   └── user.slice.js
+│   │   │
+│   │   ├── cases/
+│   │   │   ├── pages/
+│   │   │   │   ├── CaseList.jsx
+│   │   │   │   ├── CaseDetails.jsx
+│   │   │   │   └── CreateCase.jsx
+│   │   │   ├── case.service.js
+│   │   │   └── case.slice.js
+│   │   │
+│   │   ├── documents/
+│   │   │   ├── pages/
+│   │   │   │   ├── DocumentList.jsx
+│   │   │   │   └── UploadDocument.jsx
+│   │   │   └── document.service.js
+│   │   │
+│   │   ├── clients/
+│   │   │   ├── ClientList.jsx
+│   │   │   └── client.service.js
+│   │   │
+│   │   ├── reports/
+│   │   │   ├── CaseReport.jsx
+│   │   │   └── report.service.js
+│   │   │
+│   │   └── settings/
+│   │       ├── TenantSettings.jsx
+│   │       └── settings.service.js
+│
+│   └── shared/                       # Shared between platform & tenant
+│       ├── notifications/
+│       ├── profile/
+│       └── activity/
+│
+├── services/                         # Axios base config
+│   └── api.js
+│
+├── hooks/                            # Global hooks
+│   ├── useDebounce.js
+│   ├── usePagination.js
+│   └── usePermissions.js
+│
+├── context/                          # Context providers
+│   ├── AuthContext.jsx
+│   └── ThemeContext.jsx
+│
+├── utils/                            # Helpers
+│   ├── formatDate.js
+│   ├── generateMenu.js
+│   └── permissionCheck.js
+│
+├── constants/                        # Static configs
+│   ├── roles.js
+│   ├── permissions.js
+│   ├── routes.js
+│   └── sidebarConfig.js
+│
+├── styles/
+│   ├── globals.css
+│   └── tailwind.css
+│
+└── index.jsx

@@ -1,0 +1,175 @@
+﻿
+C:\TalankGlobal\IQLIMS_CLIENT\src\components\Clients.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\components\Header.jsx
+  3:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\components\ui\DataTable.jsx
+  4:3  error  'loading' is assigned a value but never used  no-unused-vars
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\components\ui\DateInput.jsx
+   3:13  error  'addDays' is defined but never used. Allowed unused vars must match /^[A-Z_]/u           no-unused-vars
+   4:41  error  'isSameDay' is defined but never used. Allowed unused vars must match /^[A-Z_]/u         no-unused-vars
+   4:52  error  'isWithinInterval' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  89:32  error  'startDate' is defined but never used                                                    no-unused-vars
+  89:43  error  'endDate' is defined but never used                                                      no-unused-vars
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\components\ui\RowActions.jsx
+  26:3  error  'itemName' is assigned a value but never used      no-unused-vars
+  27:3  error  'displayField' is assigned a value but never used  no-unused-vars
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\context\AuthContext.jsx
+   38:6   warning  React Hook useMemo has an unnecessary dependency: 'user'. Either exclude it or remove the dependency array                      react-hooks/exhaustive-deps
+  168:14  error    Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\context\FeatureContext.jsx
+  159:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\context\GlobalContext.jsx
+   14:19  error  'setLoading' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                      no-unused-vars
+   15:17  error  'setError' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                        no-unused-vars
+  104:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\context\ModulesContext.jsx
+   49:8   warning  React Hook useCallback has a missing dependency: 'user'. Either include it or remove the dependency array                       react-hooks/exhaustive-deps
+  140:8   warning  React Hook useEffect has a missing dependency: 'user'. Either include it or remove the dependency array                         react-hooks/exhaustive-deps
+  180:14  error    Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\context\RolesContext.jsx
+  150:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\context\TenantContext.jsx
+  290:6   warning  React Hook useCallback has a missing dependency: 'filters'. Either include it or remove the dependency array                    react-hooks/exhaustive-deps
+  391:14  error    Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\context\UsersContext.jsx
+  151:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\Tenants\components\ContactSection.jsx
+  36:8  warning  React Hook useEffect has a missing dependency: 'fetchContacts'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\Tenants\components\DocumentSection.jsx
+  37:8  warning  React Hook useEffect has a missing dependency: 'fetchDocuments'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\Tenants\components\LabProfileSection.jsx
+  27:8  warning  React Hook useEffect has an unnecessary dependency: 'getStepData'. Either exclude it or remove the dependency array. Outer scope values like 'getStepData' aren't valid dependencies because mutating them doesn't re-render the component  react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\Tenants\components\LicenseSection.jsx
+  48:8  warning  React Hook useEffect has a missing dependency: 'fetchLicenses'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\Tenants\components\OwnershipSection.jsx
+  27:8  warning  React Hook useEffect has an unnecessary dependency: 'getStepData'. Either exclude it or remove the dependency array. Outer scope values like 'getStepData' aren't valid dependencies because mutating them doesn't re-render the component  react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\Tenants\components\TenantForm.jsx
+  35:6  warning  React Hook useEffect has a missing dependency: 'initialForm'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\Tenants\onboarding\components\OnboardingLayout.jsx
+  11:3  error  'onSkip' is defined but never used  no-unused-vars
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\Tenants\onboarding\components\steps\ComplianceStep.jsx
+   7:3  error    'getComplianceStepData' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                 no-unused-vars
+   8:3  error    'addComplianceStepData' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                 no-unused-vars
+   9:3  error    'updateComplianceStepData' is defined but never used. Allowed unused vars must match /^[A-Z_]/u              no-unused-vars
+  89:6  warning  React Hook useEffect has a missing dependency: 'tenantId'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\Tenants\onboarding\components\steps\DocumentUploadStep.jsx
+    7:3  error  'getDocumentsStepData' is defined but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+    8:3  error  'addDocumentStepData' is defined but never used. Allowed unused vars must match /^[A-Z_]/u      no-unused-vars
+    9:3  error  'updateDocumentStepData' is defined but never used. Allowed unused vars must match /^[A-Z_]/u   no-unused-vars
+  100:9  error  'removeDocument' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\Tenants\onboarding\components\steps\SuccessStep.jsx
+  23:6  warning  React Hook useEffect has missing dependencies: 'navigate' and 'showDashboardButton'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\Tenants\pages\TenantDetailsPage.jsx
+  39:6  warning  React Hook useEffect has a missing dependency: 'fetchBaseData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\Tenants\pages\TenantsPage.jsx
+  45:7  warning  React Hook useMemo has a missing dependency: 'searchParams'. Either include it or remove the dependency array                           react-hooks/exhaustive-deps
+  46:5  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  47:5  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  48:5  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  49:5  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  50:5  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  51:5  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  60:6  warning  React Hook useEffect has missing dependencies: 'fetchTenants' and 'filters'. Either include them or remove the dependency array         react-hooks/exhaustive-deps
+  80:6  warning  React Hook useEffect has a missing dependency: 'getTenant'. Either include it or remove the dependency array                            react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\auditLogs\pages\AuditLogsPage.jsx
+   1:33  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+  17:10  error  'selectedLog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\auth\pages\LoginPage.jsx
+  16:6  warning  React Hook useEffect has a missing dependency: 'navigate'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\auth\pages\SignupPage.jsx
+  16:6  warning  React Hook useEffect has a missing dependency: 'navigate'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\auth\pages\VerifyUser.jsx
+  55:6  warning  React Hook useEffect has missing dependencies: 'navigate' and 'verifyTenantUser'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\rbac\components\FeaturesTable.jsx
+  13:27  error  'setSelectedFeature' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\rbac\components\ModulesTable.jsx
+  12:26  error  'setSelectedModule' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\rbac\components\RoleForm.jsx
+  52:6  warning  React Hook useEffect has a missing dependency: 'initialData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\rbac\components\RolesTable.jsx
+  7:23  error  'updateRole' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\rbac\pages\FeaturesPage.jsx
+  42:9  warning  React Hook useMemo has a missing dependency: 'searchParams'. Either include it or remove the dependency array                           react-hooks/exhaustive-deps
+  43:9  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  44:9  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  45:9  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  46:9  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  47:9  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  61:8  warning  React Hook useEffect has missing dependencies: 'fetchFeatures' and 'filters'. Either include them or remove the dependency array        react-hooks/exhaustive-deps
+  79:8  warning  React Hook useEffect has a missing dependency: 'fetchFeature'. Either include it or remove the dependency array                         react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\rbac\pages\ModulesPage.jsx
+  37:9  warning  React Hook useMemo has a missing dependency: 'searchParams'. Either include it or remove the dependency array                           react-hooks/exhaustive-deps
+  38:9  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  39:9  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  40:9  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  41:9  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  55:8  warning  React Hook useEffect has missing dependencies: 'fetchModules' and 'filters'. Either include them or remove the dependency array         react-hooks/exhaustive-deps
+  73:8  warning  React Hook useEffect has a missing dependency: 'fetchModule'. Either include it or remove the dependency array                          react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\rbac\pages\RolesPage.jsx
+  36:7  warning  React Hook useMemo has a missing dependency: 'searchParams'. Either include it or remove the dependency array                           react-hooks/exhaustive-deps
+  37:5  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  38:5  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  39:5  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  40:5  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  55:6  warning  React Hook useEffect has missing dependencies: 'fetchRoles' and 'filters'. Either include them or remove the dependency array           react-hooks/exhaustive-deps
+  73:6  warning  React Hook useEffect has a missing dependency: 'fetchRole'. Either include it or remove the dependency array                            react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\rbac\pages\UsersPage.jsx
+  36:9  warning  React Hook useMemo has a missing dependency: 'searchParams'. Either include it or remove the dependency array                           react-hooks/exhaustive-deps
+  37:9  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  38:9  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  39:9  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  40:9  warning  React Hook useMemo has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+  54:8  warning  React Hook useEffect has missing dependencies: 'fetchUsers' and 'filters'. Either include them or remove the dependency array           react-hooks/exhaustive-deps
+  72:8  warning  React Hook useEffect has a missing dependency: 'fetchUser'. Either include it or remove the dependency array                            react-hooks/exhaustive-deps
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\subscriptions\components\SubscriptionPlansTable.jsx
+  5:68  error  'onUpdate' is defined but never used  no-unused-vars
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\subscriptions\components\SubscriptionsTable.jsx
+  5:46  error  'onEdit' is defined but never used  no-unused-vars
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\features\subscriptions\pages\SubscriptionsPlansPage.jsx
+  68:14  error  'err' is defined but never used  no-unused-vars
+  68:19  error  Empty block statement            no-empty
+
+C:\TalankGlobal\IQLIMS_CLIENT\src\utils\getAddressFromCoords.js
+  31:11  error  'state' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+Γ£û 92 problems (37 errors, 55 warnings)
+
