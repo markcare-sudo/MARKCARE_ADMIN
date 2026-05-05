@@ -10,7 +10,9 @@ import { useModules } from "@/context/ModulesContext";
 const RoleForm = ({ onSuccess, initialData }) => {
   const { user } = useAuth();
   const { updateRole, createRole, isActionLoading, isSingleLoading } = useRoles();
-  const { tree } = useModules();
+  const { tree, modules } = useModules();
+
+  console.log(tree)
 
   const [errors, setErrors] = useState({});
 
@@ -149,8 +151,8 @@ const RoleForm = ({ onSuccess, initialData }) => {
 
             <div className="text-right">
               <span className={`text-[10px] font-bold px-2 py-1 rounded border uppercase ${errors.permissions
-                  ? "bg-red-50 text-red-600 border-red-100"
-                  : "bg-blue-50 text-blue-600 border-blue-100"
+                ? "bg-red-50 text-red-600 border-red-100"
+                : "bg-blue-50 text-blue-600 border-blue-100"
                 }`}>
                 {form.permissions.length} Selected
               </span>

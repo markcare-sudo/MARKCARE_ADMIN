@@ -3,12 +3,14 @@ import { useState, useEffect } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import { useModules } from "@/context/ModulesContext";
+import useAuth from "@/features/auth/useAuth";
 
 const DashboardLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   // We extract tree and loading status from context. 
   // The context handles the fetching logic automatically.
-  const { tree, isTreeLoading } = useModules();
+  const { menu, isTreeLoading } = useModules();
+  const { user } = useAuth()
 
   // Load collapse state from localStorage
   useEffect(() => {
@@ -29,7 +31,8 @@ const DashboardLayout = () => {
       {/* ===== SIDEBAR ===== */}
       <Sidebar
         collapsed={collapsed}
-        menuItems={tree}
+        menuItems={menu}
+        user={user}
         isLoading={isTreeLoading}
         // Tip: Consider getting these permissions from AuthContext instead of hardcoding
         userPermissions={["DASHBOARD.VIEW", "TENANTS.VIEW"]}

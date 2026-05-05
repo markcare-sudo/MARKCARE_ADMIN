@@ -1,31 +1,89 @@
-import { useState } from "react";
+// export default ModulesTable;
 import Badge from "@/components/ui/Badge";
 import DataTable from "@/components/ui/DataTable";
 import { useModules } from "@/context/ModulesContext";
 import RowActions from "@/components/ui/RowActions";
-import ModuleForm from "./ModuleForm";
 
-const ModulesTable = ({ modules, openModulePopup }) => {
-  const { deleteModule, updateModule, isActionLoading } = useModules();
+const ModulesTable = ({ modules = [], openModulePopup }) => {
+  const { deleteModule, isActionLoading } = useModules();
 
-  const [openModal, setOpenModal] = useState(false);
-  const [selectedModule, setSelectedModule] = useState(null);
+  // 🔥 1. Build map once (O(n))
+  const moduleMap = new Map(modules.map((m) => [m.id, m]));
 
+  // 🔥 2. Efficient level calculation
+  const getLevel = (row) => {
+    let level = 0;
+    let current = row;
 
-  const handleUpdate = async (data) => {
-    await updateModule(selectedModule.id, data);
-    setOpenModal(false);
+    while (current?.parent_id) {
+      current = moduleMap.get(current.parent_id);
+      if (current) level++;
+      else break;
+    }
+
+    return level;
   };
 
   const columns = [
     {
-      header: "Module Name",
-      render: (row) => row.name || "-",
+      header: "Module",
+      render: (row) => {
+        const level = getLevel(row);
+
+        return (
+          <div
+            style={{ paddingLeft: `${level * 20}px` }}
+            className="flex items-center gap-2"
+          >
+            {/* 🔥 Tree indicator */}
+            {level > 0 && (
+              <span className="text-gray-400">└─</span>
+            )}
+
+
+            {/* Name */}
+            <span className="font-medium">{row.name}</span>
+
+            {/* Group indicator */}
+            {!row.is_clickable && (
+              <Badge text="GROUP" variant="gray" />
+            )}
+          </div>
+        );
+      },
     },
+
     {
       header: "Code",
       render: (row) => row.code || "-",
     },
+
+    {
+      header: "Navigation",
+      render: (row) => (
+        <Badge
+          text={row.navigation_type}
+          variant={
+            row.navigation_type === "SIDEBAR"
+              ? "blue"
+              : row.navigation_type === "TOPBAR"
+                ? "purple"
+                : "gray"
+          }
+        />
+      ),
+    },
+
+    {
+      header: "Visible",
+      render: (row) => (
+        <Badge
+          text={row.is_visible ? "YES" : "NO"}
+          variant={row.is_visible ? "green" : "red"}
+        />
+      ),
+    },
+
     {
       header: "Status",
       render: (row) => (
@@ -35,13 +93,15 @@ const ModulesTable = ({ modules, openModulePopup }) => {
         />
       ),
     },
+
     {
-      header: "Created Date",
-      render: (row) =>
-        row.created_at
-          ? new Date(row.created_at).toLocaleDateString()
-          : "-",
+      header: "Created",
+      render: (row) => {
+        const date = row.created_at || row.createdAt;
+        return date ? new Date(date).toLocaleDateString() : "-";
+      },
     },
+
     {
       header: "Action",
       render: (row) => (
@@ -59,11 +119,16 @@ const ModulesTable = ({ modules, openModulePopup }) => {
               variant: "danger",
               showConfirm: true,
               loading: isActionLoading,
-              confirmTitle: "Delete System Module",
+              confirmTitle: "Delete Module",
               confirmMessage: (
                 <>
-                  Are you sure you want to delete the <span className="font-bold text-red-600">"{row.name}"</span> module?
-                  This will also remove all associated features and permissions.
+                  Are you sure you want to delete{" "}
+                  <span className="font-bold text-red-600">
+                    "{row.name}"
+                  </span>
+                  ?
+                  <br />
+                  This will remove all related permissions and child modules.
                 </>
               ),
               onClick: async (module) => {
@@ -76,20 +141,7 @@ const ModulesTable = ({ modules, openModulePopup }) => {
     },
   ];
 
-  return (
-    <>
-      <DataTable columns={columns} data={modules} />
-
-      {openModal && (
-        <ModuleForm
-          open={openModal}
-          onClose={() => setOpenModal(false)}
-          initialData={selectedModule}
-          onSubmit={handleUpdate}
-        />
-      )}
-    </>
-  );
+  return <DataTable columns={columns} data={modules} showRowNumber={true} />;
 };
 
 export default ModulesTable;

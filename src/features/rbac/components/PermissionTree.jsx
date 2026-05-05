@@ -1,45 +1,9 @@
-// import PermissionModule from "./PermissionModule";
+import PermissionMatrix from "./PermissionModule";
 
-// const PermissionTree = ({ tree, permissions, setPermissions }) => {
-
-//   const togglePermission = (id) => {
-
-//     const updated = new Set(permissions);
-
-//     updated.has(id)
-//       ? updated.delete(id)
-//       : updated.add(id);
-
-//     setPermissions([...updated]);
-//   };
-
-//   return (
-//     <div className="space-y-6">
-
-//       {tree?.map((module) => (
-//         <PermissionModule
-//           key={module.code}
-//           module={module}
-//           permissions={permissions}
-//           togglePermission={togglePermission}
-//           setPermissions={setPermissions}
-//         />
-//       ))}
-
-//     </div>
-//   );
-// };
-
-// export default PermissionTree;
-
-
-
-
-import PermissionModule from "./PermissionModule";
-
-const PermissionTree = ({ tree, permissions, setPermissions }) => {
+const PermissionTree = ({ tree = [], permissions = [], setPermissions }) => {
 
   const togglePermission = (id) => {
+    if (!id) return;
 
     const updated = new Set(permissions);
 
@@ -50,19 +14,23 @@ const PermissionTree = ({ tree, permissions, setPermissions }) => {
     setPermissions([...updated]);
   };
 
+  // 🔥 GROUP ROOT + CHILDREN
+  const rootModules = tree.filter(m => !m.parent_id);
+
   return (
     <div className="space-y-6">
-
-      {tree?.map((module) => (
-        <PermissionModule
-          key={module.code}
-          module={module}
-          permissions={permissions}
-          togglePermission={togglePermission}
-          setPermissions={setPermissions}
-        />
-      ))}
-
+      {rootModules.map((parent) => {
+        return (
+          <PermissionMatrix
+            key={parent.id}
+            parent={parent}
+            children={parent.children || []}
+            permissions={permissions}
+            togglePermission={togglePermission}
+            setPermissions={setPermissions}
+          />
+        );
+      })}
     </div>
   );
 };

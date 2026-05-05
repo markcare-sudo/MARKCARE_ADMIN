@@ -1,10 +1,9 @@
 import apiClient from "../utils/api";
 
-// const getModulesFeaturesPermissions = async (user) => {
-//     console.log(user)
-//     const res = await apiClient.get(`/iam/modules/${user.roleIds[0]}/my-config`);
-//     return res.data.data;
-// };/
+const getMyMenu = async () => {
+    const res = await apiClient.get(`/sidebar/me/sidebar`);
+    return res.data.data;
+};
 
 const getModulesFeaturesPermissions = async () => {
 
@@ -37,13 +36,20 @@ const deleteModule = async (id) => {
     return res;
 };
 
-const modulesService = {
+const deleteModules = async () => {
+    const res = await apiClient.delete(`/iam/modules/force-all`);
+    return res;
+};
+
+const moduleservice = {
+    getMyMenu,
     getModulesFeaturesPermissions,
     getModules,
     getModule,
     createModule,
     updateModule,
-    deleteModule
+    deleteModule,
+    deleteModules
 };
 
-export default modulesService
+export default moduleservice

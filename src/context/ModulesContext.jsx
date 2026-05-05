@@ -4,7 +4,6 @@ import { successHandler } from "@/components/SuccessHandler";
 import { postErrorHandler } from "@/components/ErrorHandler";
 import { apiStatusConstants } from "@/utils/api";
 import { useAuthContext } from "./AuthContext";
-import useAuth from "@/features/auth/useAuth";
 
 const ModulesContext = createContext();
 
@@ -13,6 +12,7 @@ export const ModulesProvider = ({ children }) => {
 
     const [modules, setModules] = useState([]);
     const [tree, setTree] = useState([]);
+    const [menu, setMenu] = useState([])
 
     // 1. Separate Statuses for Sidebar (tree), Table (list), and CRUD (action)
     const [statuses, setStatuses] = useState({
@@ -35,11 +35,26 @@ export const ModulesProvider = ({ children }) => {
         setErrors((prev) => ({ ...prev, [key]: error }));
     }, []);
 
+    const fetchMyMenu = useCallback(async () => {
+        if (!isAuthenticated) return;
+        try {
+            updateState("tree", apiStatusConstants.IN_PROGRESS);
+            const res = await modulesService.getMyMenu();
+            setMenu(res || []);
+            updateState("tree", apiStatusConstants.SUCCESS);
+        } catch (err) {
+            updateState("tree", apiStatusConstants.FAILURE, err);
+        }
+    }, [isAuthenticated, user?.id]);
+
     const fetchModulesFeaturesPermissions = useCallback(async () => {
+        console.log("res----->", isAuthenticated)
         if (!isAuthenticated) return;
         try {
             updateState("tree", apiStatusConstants.IN_PROGRESS);
             const res = await modulesService.getModulesFeaturesPermissions(user);
+            console.log("res----->", res)
+
             setTree(res.data.data || []);
             updateState("tree", apiStatusConstants.SUCCESS);
         } catch (err) {
@@ -79,7 +94,7 @@ export const ModulesProvider = ({ children }) => {
             const res = await modulesService.createModule(data);
             successHandler(res);
             // Refreshing both ensures Sidebar and Table are synced
-            await Promise.all([fetchModulesFeaturesPermissions(), fetchModules()]);
+            await Promise.all([fetchMyMenu(), fetchModulesFeaturesPermissions(), fetchModules()]);
             updateState("action", apiStatusConstants.SUCCESS);
             return res.data;
         } catch (err) {
@@ -94,7 +109,7 @@ export const ModulesProvider = ({ children }) => {
             updateState("action", apiStatusConstants.IN_PROGRESS);
             const res = await modulesService.updateModule(id, data);
             successHandler(res);
-            await Promise.all([fetchModulesFeaturesPermissions(), fetchModules()]);
+            await Promise.all([fetchMyMenu(), fetchModulesFeaturesPermissions(), fetchModules()]);
             updateState("action", apiStatusConstants.SUCCESS);
             return res.data;
         } catch (err) {
@@ -109,7 +124,21 @@ export const ModulesProvider = ({ children }) => {
             updateState("action", apiStatusConstants.IN_PROGRESS);
             const res = await modulesService.deleteModule(id);
             successHandler(res);
-            await Promise.all([fetchModulesFeaturesPermissions(), fetchModules()]);
+            await Promise.all([fetchMyMenu(), fetchModulesFeaturesPermissions(), fetchModules()]);
+            updateState("action", apiStatusConstants.SUCCESS);
+        } catch (err) {
+            updateState("action", apiStatusConstants.FAILURE, err);
+            postErrorHandler(err);
+            throw err;
+        }
+    };
+
+    const deleteModules = async () => {
+        try {
+            updateState("action", apiStatusConstants.IN_PROGRESS);
+            const res = await modulesService.deleteModules();
+            successHandler(res);
+            await Promise.all([fetchMyMenu(), fetchModulesFeaturesPermissions(), fetchModules()]);
             updateState("action", apiStatusConstants.SUCCESS);
         } catch (err) {
             updateState("action", apiStatusConstants.FAILURE, err);
@@ -124,9 +153,11 @@ export const ModulesProvider = ({ children }) => {
 
     useEffect(() => {
         if (isAuthenticated && user) {
+            fetchMyMenu()
             fetchModulesFeaturesPermissions();
             fetchModules();
         } else {
+            setMenu([]);
             setModules([]);
             setTree([]);
             setStatuses({
@@ -136,12 +167,13 @@ export const ModulesProvider = ({ children }) => {
             });
             setErrors({ tree: null, list: null, action: null });
         }
-    }, [isAuthenticated, user?.id, fetchModulesFeaturesPermissions, fetchModules]);
+    }, [isAuthenticated, user?.id, fetchMyMenu, fetchModulesFeaturesPermissions, fetchModules]);
 
     return (
         <ModulesContext.Provider
             value={{
                 // Data
+                menu,
                 modules,
                 tree,
 
@@ -162,12 +194,14 @@ export const ModulesProvider = ({ children }) => {
                 isEmpty: statuses.list === apiStatusConstants.SUCCESS && modules.length === 0,
 
                 // Methods
+                fetchMyMenu,
                 fetchModulesFeaturesPermissions,
                 fetchModules,
                 fetchModule,
                 createModule,
                 updateModule,
                 deleteModule,
+                deleteModules,
                 clearModuleActionState,
             }}
         >

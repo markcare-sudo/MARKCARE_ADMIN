@@ -13,48 +13,43 @@ import ApiFailure from "@/components/ui/ApiFailure";
 import { Loader } from "@/components/Loader";
 import { FiRefreshCw } from "react-icons/fi";
 import ModuleFilters from "../components/ModuleFilters";
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
 const ModulesPage = () => {
-    // ✅ Updated to use granular Context states
     const {
         modules = [],
         fetchModules,
         fetchModule,
-        isListLoading,       // List-specific loading
-        isListError,         // List-specific error boolean
-        listError,           // List-specific error object
-        clearModuleActionState // Essential for modal resets
+        isListLoading,
+        isListError,
+        listError,
+        clearModuleActionState,
+        deleteModules,
     } = useModules();
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const search = searchParams.get("search");
-    const statusParam = searchParams.get("status");
-    const startDate = searchParams.get("startDate");
-    const endDate = searchParams.get("endDate");
-
-    // ✅ 1. PARSE FILTERS FROM URL
+    // ✅ UPDATED FILTERS (aligned with module model)
     const filters = useMemo(() => ({
-        search: search || "",
-        status: statusParam || "",
-        startDate: startDate || "",
-        endDate: endDate || ""
-    }), [search, statusParam, startDate, endDate]);
+        search: searchParams.get("search") || "",
+        navigation_type: searchParams.get("navigation_type") || "",
+        is_active: searchParams.get("is_active") || "",
+    }), [searchParams]);
 
     const modalType = searchParams.get("modal");
     const editId = searchParams.get("id");
 
     const [selectedModule, setSelectedModule] = useState(null);
     const [isFetchingSelected, setIsFetchingSelected] = useState(false);
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+    const [loadingDelete, setLoadingDelete] = useState(false);
 
-    // ✅ 2. TRIGGER API FETCH ON FILTER CHANGE
-    const filtersKey = JSON.stringify(filters);
-
+    // ✅ FETCH MODULE LIST
     useEffect(() => {
         fetchModules(filters);
-    }, [filtersKey, fetchModules]);
+    }, [JSON.stringify(filters)]);
 
-    // ✅ 3. SYNC MODAL DATA BASED ON URL ID
+    // ✅ FETCH SINGLE MODULE FOR EDIT
     useEffect(() => {
         if (modalType === "edit" && editId) {
             const loadData = async () => {
@@ -70,55 +65,83 @@ const ModulesPage = () => {
         } else {
             setSelectedModule(null);
         }
-    }, [modalType, editId, fetchModule]);
+    }, [modalType, editId]);
 
+    // ✅ UPDATE FILTERS IN URL
     const updateFilters = (newFilters) => {
         const params = new URLSearchParams(searchParams);
-        Object.keys(newFilters).forEach(key => {
+
+        Object.keys(newFilters).forEach((key) => {
             if (newFilters[key]) params.set(key, newFilters[key]);
             else params.delete(key);
         });
+
         setSearchParams(params, { replace: true });
     };
 
+    // ✅ OPEN MODAL
     const openModulePopup = (module = null) => {
         const params = new URLSearchParams(searchParams);
+
         if (module?.id) {
             params.set("modal", "edit");
             params.set("id", module.id);
         } else {
             params.set("modal", "create");
         }
+
         setSearchParams(params);
     };
 
+    // ✅ CLOSE MODAL
     const closeModulePopup = () => {
         const params = new URLSearchParams(searchParams);
         params.delete("modal");
         params.delete("id");
         setSearchParams(params);
-        // ✅ CRITICAL: Reset modal/action errors so they don't persist
-        clearModuleActionState();
+
+        clearModuleActionState(); // reset errors/loading
     };
 
-    /** ✅ REFINED ERROR STATE (List-Level) **/
-    // We only show the full-screen error if the initial load fails (no data present)
-    if (isListError && modules.length === 0) return (
-        <div className="h-[70vh] flex items-center justify-center">
-            <ApiFailure
-                error={listError}
-                message="Error loading modules"
-                onRetry={() => fetchModules(filters)}
-            />
-        </div>
-    );
+    const handleDeleteAll = async () => {
+        try {
+            setLoadingDelete(true);
+
+            await deleteModules(); // 🔥 your API call
+
+            setShowDeleteDialog(false);
+
+            // optional: refresh list
+            fetchModules();
+
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoadingDelete(false);
+        }
+    };
+
+    // ✅ ERROR STATE
+    if (isListError && modules.length === 0) {
+        return (
+            <div className="h-[70vh] flex items-center justify-center">
+                <ApiFailure
+                    error={listError}
+                    message="Error loading modules"
+                    onRetry={() => fetchModules(filters)}
+                />
+            </div>
+        );
+    }
 
     return (
         <div className="space-y-6">
+
+            {/* ✅ HEADER */}
             <PageHeader
-                title="System Modules"
-                subtitle="Manage high-level platform modules"
-                breadcrumb="RBAC / Modules Management"
+                title="Module Management"
+                subtitle="Manage navigation, hierarchy, and system features"
+                breadcrumb="RBAC / Modules"
                 action={
                     <>
                         <Button
@@ -130,48 +153,79 @@ const ModulesPage = () => {
                             <FiRefreshCw className={isListLoading ? "animate-spin" : ""} />
                             Refresh
                         </Button>
-                        <Button variant="primary" onClick={() => openModulePopup()}>
+
+                        <Button
+                            variant="primary"
+                            onClick={() => openModulePopup()}
+                            disabled={isListLoading}
+                        >
                             + Create Module
                         </Button>
                     </>
                 }
             />
 
-            <ModuleFilters filters={filters} onFilterChange={updateFilters} />
+            {/* ✅ FILTERS */}
+            <ModuleFilters filters={filters} onFilterChange={updateFilters} onDeleteAll={() => setShowDeleteDialog(true)} />
 
+            {/* ✅ TABLE / LIST */}
             <div className="min-h-[400px] relative">
-                {/* Overlay Loader specifically for list refreshes */}
+
+                {/* Loader overlay */}
                 {isListLoading && (
                     <div className="absolute inset-0 bg-white/50 z-10 flex items-center justify-center">
                         <Loader />
                     </div>
                 )}
 
+                {/* Empty */}
                 {modules.length === 0 && !isListLoading ? (
                     <div className="h-[50vh] flex items-center justify-center">
-                        <ApiEmpty message={filters.search ? "No modules match your search" : "No modules available"} />
+                        <ApiEmpty
+                            message={
+                                filters.search
+                                    ? "No modules match your search"
+                                    : "No modules created yet. Start by adding your first module."
+                            }
+                        />
                     </div>
                 ) : (
-                    <ModulesTable modules={modules} openModulePopup={openModulePopup} />
+                    <ModulesTable
+                        modules={modules}
+                        openModulePopup={openModulePopup}
+                    />
                 )}
             </div>
 
+            {/* ✅ MODAL */}
             <Modal
                 isOpen={!!modalType}
                 onClose={closeModulePopup}
                 title={modalType === "edit" ? "Edit Module" : "Create Module"}
             >
                 {isFetchingSelected ? (
-                    <div className="py-10 flex justify-center"><Loader size="sm" /></div>
+                    <div className="py-10 flex justify-center">
+                        <Loader size="sm" />
+                    </div>
                 ) : (
                     <ModuleForm
                         initialData={selectedModule}
-                        onSuccess={() => {
-                            closeModulePopup();
-                        }}
+                        modules={modules}   // 🔥 IMPORTANT (for parent selection)
+                        onSuccess={closeModulePopup}
                     />
                 )}
             </Modal>
+
+            <ConfirmDialog
+                open={showDeleteDialog}
+                title="Delete All Modules"
+                message="This will permanently delete all modules and permissions. This action cannot be undone."
+                confirmText="Delete All"
+                cancelText="Cancel"
+                onConfirm={handleDeleteAll}
+                onCancel={() => setShowDeleteDialog(false)}
+                loading={loadingDelete}
+            />
         </div>
     );
 };

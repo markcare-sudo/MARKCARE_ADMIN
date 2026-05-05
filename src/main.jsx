@@ -5,7 +5,6 @@ import { HelmetProvider } from 'react-helmet-async'
 import { AuthProvider } from './context/AuthContext';
 import { RolesProvider } from './context/RolesContext';
 import { ModulesProvider } from './context/ModulesContext';
-import { FeaturesProvider } from './context/FeatureContext';
 import { UsersProvider } from './context/UsersContext';
 import App from './App.jsx'
 import './index.css'
@@ -26,24 +25,22 @@ createRoot(document.getElementById('root')).render(
           {/* 1. Global Config/Structures first */}
 
           <ModulesProvider>
-            <FeaturesProvider>
-              {/* 2. Identity and Access next */}
-              <RolesProvider>
-                <UsersProvider>
-                  <BrandProvider>
-                    <CategoryProvider>
-                      <ProductProvider>
-                        <ServiceProvider>
-                          <OrderProvider>
-                            <App />
-                          </OrderProvider>
-                        </ServiceProvider>
-                      </ProductProvider>
-                    </CategoryProvider>
-                  </BrandProvider>
-                </UsersProvider>
-              </RolesProvider>
-            </FeaturesProvider>
+            {/* 2. Identity and Access next */}
+            <RolesProvider>
+              <UsersProvider>
+                <BrandProvider>
+                  <CategoryProvider>
+                    <ProductProvider>
+                      <ServiceProvider>
+                        <OrderProvider>
+                          <App />
+                        </OrderProvider>
+                      </ServiceProvider>
+                    </ProductProvider>
+                  </CategoryProvider>
+                </BrandProvider>
+              </UsersProvider>
+            </RolesProvider>
           </ModulesProvider>
         </AuthProvider>
       </BrowserRouter>

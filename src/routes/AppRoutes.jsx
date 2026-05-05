@@ -13,8 +13,6 @@ import RoleSelection from "@/features/auth/pages/RoleSelection";
 import AuditLogsPage from "@/features/auditLogs/pages/AuditLogsPage";
 import VerifyUserPage from "@/features/auth/pages/VerifyUser";
 import UsersPage from "@/features/rbac/pages/UsersPage";
-import FeaturesPage from "@/features/rbac/pages/FeaturesPage";
-// import ModulesPage from "@/features/rbac/pages/ModulePage";
 import CategoriesPage from "@/features/Categories/pages/CategoriesPage";
 import ProductsPage from "@/features/products/pages/ProductsPage";
 import BrandsPage from "@/features/brands/pages/BrandPage";
@@ -64,7 +62,7 @@ const AppRoutes = () => {
             />
 
             <Route
-              path="/rbac/roles"
+              path="/masters/roles"
               element={
                 <ErrorBoundary>
                   <RolesPage />
@@ -73,7 +71,7 @@ const AppRoutes = () => {
             />
 
             <Route
-              path="/rbac/users"
+              path="/masters/users"
               element={
                 <ErrorBoundary>
                   <UsersPage />
@@ -82,19 +80,10 @@ const AppRoutes = () => {
             />
 
             <Route
-              path="/rbac/modules"
+              path="/masters/modules"
               element={
                 <ErrorBoundary>
                   <ModulesPage />
-                </ErrorBoundary>
-              }
-            />
-
-            <Route
-              path="/rbac/features"
-              element={
-                <ErrorBoundary>
-                  <FeaturesPage />
                 </ErrorBoundary>
               }
             />
@@ -164,7 +153,7 @@ const AppRoutes = () => {
             </Route>
 
             <Route
-              path="/orders/orders"
+              path="/sales/orders"
               element={
                 <ErrorBoundary>
                   <OrdersPage />

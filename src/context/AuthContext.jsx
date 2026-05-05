@@ -17,20 +17,13 @@ import {
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => getUserData());
   const [modules, setModules] = useState([]);
   const [permissions, setPermissions] = useState([]);
   const [roles, setRoles] = useState([]);
   const [activeRole, setActiveRole] = useState(null);
   const [status, setStatus] = useState(apiStatusConstants.INITIAL);
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    const savedUser = getUserData();
-    if (savedUser) {
-      setUser(savedUser);
-    }
-  }, []); // Sync once on mount
+  const [error, setError] = useState(null);
 
   // Reactive authentication check
   const isAuthenticated = useMemo(() => {
