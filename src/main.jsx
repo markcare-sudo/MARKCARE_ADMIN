@@ -15,6 +15,7 @@ import { BrandProvider } from './context/BrandContext';
 import { ProductProvider } from './context/ProductContext';
 import { CategoryProvider } from './context/CategoryContext';
 import { ServiceProvider } from './context/ServiceContext';
+import { OrderProvider } from './context/OrderContext';
 
 
 createRoot(document.getElementById('root')).render(
@@ -33,7 +34,9 @@ createRoot(document.getElementById('root')).render(
                     <CategoryProvider>
                       <ProductProvider>
                         <ServiceProvider>
-                          <App />
+                          <OrderProvider>
+                            <App />
+                          </OrderProvider>
                         </ServiceProvider>
                       </ProductProvider>
                     </CategoryProvider>
