@@ -177,7 +177,7 @@ const ServicesPage = () => {
             <Modal
                 isOpen={!!modalType}
                 onClose={closeServicePopup}
-                size="lg"
+                width="max-w-4xl"
                 title={
                     modalType === "edit"
                         ? "Edit Service"

@@ -5,6 +5,7 @@ import Select from "@/components/ui/Select";
 import { FiPlus, FiTrash2, FiUpload } from "react-icons/fi";
 import { useCategories } from "@/context/CategoryContext";
 import { useServices } from "@/context/ServiceContext";
+import { useGlobalContext } from "@/context/GlobalContext";
 
 const SERVICE_TYPES = ["ONE_TIME", "SUBSCRIPTION", "AMC", "CMC", "OM"];
 const SKILL_LEVELS = ["BASIC", "INTERMEDIATE", "EXPERT"];
@@ -13,6 +14,7 @@ const ServiceForm = ({ initialData, onSuccess }) => {
     const [loading, setLoading] = useState(false);
     const { createService, updateService } = useServices();
     const { categories } = useCategories();
+    const { getImageUrl } = useGlobalContext();
 
     const [form, setForm] = useState({
         name: "",
@@ -235,7 +237,7 @@ const ServiceForm = ({ initialData, onSuccess }) => {
                                 src={
                                     img instanceof File
                                         ? URL.createObjectURL(img)
-                                        : img.image_url || img.url || ""
+                                        : getImageUrl(img.url) || ""
                                 }
                                 className="w-24 h-24 object-cover rounded-lg shadow"
                             />

@@ -20,6 +20,7 @@ import ServicesPage from "@/features/products/pages/ServicesPage";
 import NotFound from "@/components/NotFound";
 import ModulesPage from "@/features/rbac/pages/ModulesPage";
 import OrdersPage from "@/features/orders/pages/OrdersPage";
+import BookingsPage from "@/features/orders/pages/ServiceBookingsPage";
 
 // Lazy-loaded pages
 // const NotFound = lazy(() => import("../pages/NotFound"));
@@ -157,6 +158,14 @@ const AppRoutes = () => {
               element={
                 <ErrorBoundary>
                   <OrdersPage />
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/sales/bookings"
+              element={
+                <ErrorBoundary>
+                  <BookingsPage />
                 </ErrorBoundary>
               }
             />

@@ -12,7 +12,7 @@ const OrdersTable = ({ orders, onView }) => {
             render: (row) => (
                 <div className="flex flex-col">
                     <span className="font-medium text-gray-900">
-                        #{row.id}
+                        #{row.order_code}
                     </span>
                     <span className="text-xs text-gray-500">
                         {row.user?.name || "Guest"}

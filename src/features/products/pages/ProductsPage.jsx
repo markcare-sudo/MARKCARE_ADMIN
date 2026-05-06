@@ -129,7 +129,7 @@ const ProductsPage = () => {
             <Modal
                 isOpen={!!modalType}
                 onClose={closeProductPopup}
-                size="lg" // Catalog forms are usually larger
+                width="max-w-4xl"
                 title={modalType === "edit" ? "Edit Product Details" : "Add New Product to Catalog"}
             >
                 {isFetchingSelected ? (

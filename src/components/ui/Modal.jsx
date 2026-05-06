@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { FiX } from "react-icons/fi";
 
-const Modal = ({ isOpen, onClose, title, children }) => {
+const Modal = ({ isOpen, onClose, title, children, width }) => {
   useEffect(() => {
     // Prevent body scroll when modal is open
     if (isOpen) {
@@ -25,7 +25,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
       />
 
       {/* Modal Container */}
-      <div className="relative bg-white w-full max-w-2xl rounded shadow-xl z-10 flex flex-col max-h-[90vh]">
+      <div className={`relative bg-white w-full ${width ? width : "max-w-2xl"} rounded shadow-xl z-10 flex flex-col max-h-[90vh]`}>
 
         {/* Fixed Header: Stay at the top */}
         <div className="flex justify-between items-center p-6 border-b sticky top-0 bg-white rounded-t-lg z-20">
@@ -39,7 +39,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
         </div>
 
         {/* Scrollable Body: Content goes here */}
-        <div className="p-6 overflow-y-auto custom-scrollbar flex-1">
+        <div className="px-6 py-4 overflow-y-auto custom-scrollbar flex-1">
           {children}
         </div>
       </div>

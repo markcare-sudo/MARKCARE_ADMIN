@@ -15,6 +15,8 @@ import { ProductProvider } from './context/ProductContext';
 import { CategoryProvider } from './context/CategoryContext';
 import { ServiceProvider } from './context/ServiceContext';
 import { OrderProvider } from './context/OrderContext';
+import { GlobalProvider } from './context/GlobalContext';
+import { BookingProvider } from './context/BookingContext';
 
 
 createRoot(document.getElementById('root')).render(
@@ -24,24 +26,28 @@ createRoot(document.getElementById('root')).render(
         <AuthProvider>
           {/* 1. Global Config/Structures first */}
 
-          <ModulesProvider>
-            {/* 2. Identity and Access next */}
-            <RolesProvider>
-              <UsersProvider>
-                <BrandProvider>
-                  <CategoryProvider>
-                    <ProductProvider>
-                      <ServiceProvider>
-                        <OrderProvider>
-                          <App />
-                        </OrderProvider>
-                      </ServiceProvider>
-                    </ProductProvider>
-                  </CategoryProvider>
-                </BrandProvider>
-              </UsersProvider>
-            </RolesProvider>
-          </ModulesProvider>
+          <GlobalProvider>
+            <ModulesProvider>
+              {/* 2. Identity and Access next */}
+              <RolesProvider>
+                <UsersProvider>
+                  <BrandProvider>
+                    <CategoryProvider>
+                      <ProductProvider>
+                        <ServiceProvider>
+                          <OrderProvider>
+                            <BookingProvider>
+                              <App />
+                            </BookingProvider>
+                          </OrderProvider>
+                        </ServiceProvider>
+                      </ProductProvider>
+                    </CategoryProvider>
+                  </BrandProvider>
+                </UsersProvider>
+              </RolesProvider>
+            </ModulesProvider>
+          </GlobalProvider>
         </AuthProvider>
       </BrowserRouter>
     </HelmetProvider>

@@ -48,13 +48,10 @@ export const ModulesProvider = ({ children }) => {
     }, [isAuthenticated, user?.id]);
 
     const fetchModulesFeaturesPermissions = useCallback(async () => {
-        console.log("res----->", isAuthenticated)
         if (!isAuthenticated) return;
         try {
             updateState("tree", apiStatusConstants.IN_PROGRESS);
             const res = await modulesService.getModulesFeaturesPermissions(user);
-            console.log("res----->", res)
-
             setTree(res.data.data || []);
             updateState("tree", apiStatusConstants.SUCCESS);
         } catch (err) {

@@ -1,33 +1,33 @@
 import { createContext, useContext, useState, useCallback, useEffect } from "react";
-import ordersService from "@/services/orders.service";
+import bookingService from "@/services/booking.service";
 import { successHandler } from "@/components/SuccessHandler";
 import { postErrorHandler } from "@/components/ErrorHandler";
 import { apiStatusConstants } from "@/utils/api";
 import { useAuthContext } from "./AuthContext";
 
-const OrderContext = createContext();
+const BookingContext = createContext();
 
-export const OrderProvider = ({ children }) => {
+export const BookingProvider = ({ children }) => {
     const { isAuthenticated } = useAuthContext();
 
-    const [orders, setOrders] = useState([]);
+    const [bookings, setBookings] = useState([]);
     const [pagination, setPagination] = useState(null);
-    const [currentOrder, setCurrentOrder] = useState(null);
+    const [currentBooking, setCurrentBooking] = useState(null);
     const [status, setStatus] = useState(apiStatusConstants.INITIAL);
 
     // =========================
-    // 📦 1. FETCH ORDERS
+    // 📅 1. FETCH BOOKINGS
     // =========================
-    const fetchOrders = useCallback(async (params = {}) => {
+    const fetchBookings = useCallback(async (params = {}) => {
         if (!isAuthenticated) return;
 
         try {
             setStatus(apiStatusConstants.IN_PROGRESS);
 
-            const res = await ordersService.getOrders(params);
+            const res = await bookingService.getBookings(params);
 
-            setOrders(res.data.data?.data || []);
-            setPagination(res.data.data?.pagination || null);
+            setBookings(res.data?.data.data || []);
+            setPagination(res.data?.data.pagination || null);
 
             setStatus(apiStatusConstants.SUCCESS);
         } catch (err) {
@@ -37,14 +37,14 @@ export const OrderProvider = ({ children }) => {
     }, [isAuthenticated]);
 
     // =========================
-    // 📦 2. ORDER DETAILS
+    // 📅 2. BOOKING DETAILS
     // =========================
-    const fetchOrderDetails = async (orderId) => {
+    const fetchBookingDetails = async (bookingId) => {
         try {
             setStatus(apiStatusConstants.IN_PROGRESS);
 
-            const res = await ordersService.getOrderById(orderId);
-            setCurrentOrder(res.data.data);
+            const res = await bookingService.getBookingById(bookingId);
+            setCurrentBooking(res.data.data);
 
             setStatus(apiStatusConstants.SUCCESS);
         } catch (err) {
@@ -54,17 +54,17 @@ export const OrderProvider = ({ children }) => {
     };
 
     // =========================
-    // 💳 3. CREATE ORDER
+    // 💳 3. CREATE BOOKING
     // =========================
-    const placeOrder = async (payload) => {
+    const createBooking = async (payload) => {
         try {
             setStatus(apiStatusConstants.IN_PROGRESS);
 
-            const res = await ordersService.createOrder(payload);
+            const res = await bookingService.create(payload);
 
-            // ⚡ IMPORTANT: return razorpay order
             setStatus(apiStatusConstants.SUCCESS);
 
+            // ⚡ important for Razorpay
             return res.data.data;
         } catch (err) {
             postErrorHandler(err);
@@ -76,15 +76,15 @@ export const OrderProvider = ({ children }) => {
     // =========================
     // 🔐 4. VERIFY PAYMENT
     // =========================
-    const verifyPayment = async (payload) => {
+    const verifyBookingPayment = async (payload) => {
         try {
             setStatus(apiStatusConstants.IN_PROGRESS);
 
-            const res = await ordersService.verifyPayment(payload);
+            const res = await bookingService.verifyPayment(payload);
 
             successHandler(res);
 
-            await fetchOrders(); // refresh orders after payment
+            await fetchBookings();
 
             setStatus(apiStatusConstants.SUCCESS);
 
@@ -97,16 +97,16 @@ export const OrderProvider = ({ children }) => {
     };
 
     // =========================
-    // ❌ 5. CANCEL ORDER
+    // ❌ 5. CANCEL BOOKING
     // =========================
-    const cancelOrder = async (orderId) => {
+    const cancelBooking = async (bookingId) => {
         try {
             setStatus(apiStatusConstants.IN_PROGRESS);
 
-            const res = await ordersService.cancelOrder(orderId);
+            const res = await bookingService.cancelBooking(bookingId);
 
             successHandler(res);
-            await fetchOrders();
+            await fetchBookings();
 
             setStatus(apiStatusConstants.SUCCESS);
         } catch (err) {
@@ -116,18 +116,18 @@ export const OrderProvider = ({ children }) => {
     };
 
     // =========================
-    // 🛠️ 6. UPDATE STATUS (ADMIN)
+    // 🔄 6. UPDATE STATUS (ADMIN)
     // =========================
-    const updateOrderStatus = async (orderId, statusValue) => {
+    const updateBookingStatus = async (bookingId, statusValue) => {
         try {
             setStatus(apiStatusConstants.IN_PROGRESS);
 
-            const res = await ordersService.updateOrderStatus(orderId, {
+            const res = await bookingService.updateBookingStatus(bookingId, {
                 status: statusValue,
             });
 
             successHandler(res);
-            await fetchOrders();
+            await fetchBookings();
 
             setStatus(apiStatusConstants.SUCCESS);
         } catch (err) {
@@ -137,16 +137,16 @@ export const OrderProvider = ({ children }) => {
     };
 
     // =========================
-    // 🗑️ 7. DELETE ORDER (ADMIN)
+    // 🗑️ 7. DELETE BOOKING (ADMIN)
     // =========================
-    const deleteOrder = async (orderId) => {
+    const deleteBooking = async (bookingId) => {
         try {
             setStatus(apiStatusConstants.IN_PROGRESS);
 
-            const res = await ordersService.deleteOrder(orderId);
+            const res = await bookingService.deleteBooking(bookingId);
 
             successHandler(res);
-            await fetchOrders();
+            await fetchBookings();
 
             setStatus(apiStatusConstants.SUCCESS);
         } catch (err) {
@@ -160,33 +160,33 @@ export const OrderProvider = ({ children }) => {
     // =========================
     useEffect(() => {
         if (isAuthenticated) {
-            fetchOrders();
+            fetchBookings();
         }
-    }, [isAuthenticated, fetchOrders]);
+    }, [isAuthenticated, fetchBookings]);
 
     return (
-        <OrderContext.Provider
+        <BookingContext.Provider
             value={{
-                orders,
+                bookings,
                 pagination,
-                currentOrder,
+                currentBooking,
                 status,
                 loading: status === apiStatusConstants.IN_PROGRESS,
 
-                fetchOrders,
-                fetchOrderDetails,
-                placeOrder,
-                verifyPayment,
-                cancelOrder,
+                fetchBookings,
+                fetchBookingDetails,
+                createBooking,
+                verifyBookingPayment,
+                cancelBooking,
 
                 // admin
-                updateOrderStatus,
-                deleteOrder,
+                updateBookingStatus,
+                deleteBooking,
             }}
         >
             {children}
-        </OrderContext.Provider>
+        </BookingContext.Provider>
     );
 };
 
-export const useOrder = () => useContext(OrderContext);
+export const useBooking = () => useContext(BookingContext);
