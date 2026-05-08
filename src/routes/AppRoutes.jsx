@@ -256,7 +256,7 @@ import LoginPage from "@/features/auth/pages/LoginPage";
  * If your file is named VerifyOTPPage.jsx, change 'VerifyOtpPage' to 'VerifyOTPPage'
  * Ensure the path matches the file system exactly (case-sensitive)
  */
-import VerifyOtpPage from "@/features/auth/pages/VerifyOtpPage";
+// import VerifyOtpPage from "@/features/auth/pages/VerifyOtpPage";
 
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ProfilePage from "@/features/profile/pages/ProfilePage";
@@ -281,6 +281,7 @@ import SettingsPage from "@/features/settings/pages/SettingsPage";
 import ReportsPage from "@/features/reports/pages/ReportsPage";
 import BlogsPage from "@/features/blogs/pages/BlogsPage";
 import ErrorBoundary from "@/components/ErrorBoundory";
+import VerifyLoginOtpPage from "@/features/auth/pages/VerifyOTPPage";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -290,7 +291,7 @@ const AppRoutes = () => {
       <Routes location={location}>
         {/* ================= PUBLIC ROUTES ================== */}
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/verify-otp" element={<VerifyOtpPage />} />
+        <Route path="/verify-otp" element={<VerifyLoginOtpPage />} />
         <Route path="/select-role" element={<RoleSelection />} />
         <Route path="/verify-email" element={<VerifyUserPage />} />
 
