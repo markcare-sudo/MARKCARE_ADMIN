@@ -12,7 +12,7 @@ const BookingsTable = ({ bookings, onView }) => {
             render: (row) => (
                 <div className="flex flex-col">
                     <span className="font-medium text-gray-900">
-                        #{row.id}
+                        #{row.booking_code}
                     </span>
                     <span className="text-xs text-gray-500">
                         {row.user?.name || "Guest"}
@@ -96,7 +96,9 @@ const BookingsTable = ({ bookings, onView }) => {
                     ? new Date(row.created_at).toLocaleDateString("en-IN", {
                         dateStyle: "medium",
                     })
-                    : "-",
+                    : new Date(row.createdAt).toLocaleDateString("en-IN", {
+                        dateStyle: "medium",
+                    }),
         },
 
         {

@@ -61,6 +61,7 @@ const getModuleIcon = (code) => {
     SALES: Icons.FiTrendingUp,
     ORDERS: Icons.FiShoppingCart,
     BILLING: Icons.FiCreditCard,
+    BOOKINGS: Icons.FiCalendar,
 
     // Operations
     INVENTORY: Icons.FiArchive,
@@ -186,8 +187,8 @@ const Sidebar = ({
         {!collapsed && (
           <img src={LOGOS.MARKCARE_LOGO} alt="logo" className="h-7" />
         )}
-        <button onClick={toggleSidebar}>
-          <Icons.FiMenu />
+        <button onClick={toggleSidebar} className="ml-2 cursor-pointer">
+          <Icons.FiMenu size={20} />
         </button>
       </div>
 
