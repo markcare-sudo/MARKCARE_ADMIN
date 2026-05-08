@@ -5,9 +5,9 @@ import {
   clearUserData,
 } from "./sessionStorage";
 
-export const API_BASE_URL = "http://localhost:3001/api/v1";
+// export const API_BASE_URL = "http://localhost:3001/api/v1";
 
-// export const API_BASE_URL = "https://markcare.com/api/v1";
+export const API_BASE_URL = 'https://server-89nw.onrender.com/api/v1'
 
 export const apiStatusConstants = {
   INITIAL: "INITIAL",
