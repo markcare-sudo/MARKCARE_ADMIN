@@ -246,7 +246,7 @@ import { Routes, Route, useLocation, Outlet, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 // FIX: Corrected typo 'ErrorBoundory' -> 'ErrorBoundary'
-import ErrorBoundary from "../components/ErrorBoundary";
+// import ErrorBoundary from "../components/ErrorBoundary";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import LoginPage from "@/features/auth/pages/LoginPage";
 
@@ -278,6 +278,7 @@ import BookingsPage from "@/features/orders/pages/ServiceBookingsPage";
 import SettingsPage from "@/features/settings/pages/SettingsPage";
 import ReportsPage from "@/features/reports/pages/ReportsPage";
 import BlogsPage from "@/features/blogs/pages/BlogsPage";
+import ErrorBoundary from "@/components/ErrorBoundory";
 
 const AppRoutes = () => {
   const location = useLocation();
