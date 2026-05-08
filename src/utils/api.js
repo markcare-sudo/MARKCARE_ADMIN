@@ -31,9 +31,7 @@ apiClient.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`;
     }
 
-    // 🔥 AUTO HANDLE CONTENT TYPE
     if (config.data instanceof FormData) {
-      // ❌ DO NOT set Content-Type → axios will handle boundary
       delete config.headers["Content-Type"];
     } else {
       config.headers["Content-Type"] = "application/json";
