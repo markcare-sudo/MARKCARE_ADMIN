@@ -31,10 +31,11 @@ const MENU_ORDER = {
   INVENTORY: 17,
 
   // System
-  REPORTS: 18,
-  AUDIT_LOGS: 19,
-  EMAILS: 20,
-  SETTINGS: 21,
+  BLOGS: 18,
+  REPORTS: 19,
+  AUDIT_LOGS: 20,
+  EMAILS: 21,
+  SETTINGS: 22,
 };
 
 const getModuleIcon = (code) => {
@@ -67,6 +68,7 @@ const getModuleIcon = (code) => {
     INVENTORY: Icons.FiArchive,
 
     // System
+    BLOGS: Icons.FiFileText,
     REPORTS: Icons.FiBarChart2,
     AUDIT_LOGS: Icons.FiClipboard,
     EMAILS: Icons.FiMail,
@@ -187,7 +189,7 @@ const Sidebar = ({
         {!collapsed && (
           <img src={LOGOS.MARKCARE_LOGO} alt="logo" className="h-7" />
         )}
-        <button onClick={toggleSidebar} className="ml-2 cursor-pointer">
+        <button onClick={toggleSidebar} className="ml-1.5 cursor-pointer">
           <Icons.FiMenu size={20} />
         </button>
       </div>

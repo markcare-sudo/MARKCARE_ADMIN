@@ -10,7 +10,7 @@ const Select = ({ label, value, onChange, options, error }) => {
       <select
         value={value}
         onChange={onChange}
-        className={`w-full border rounded px-4 py-2 focus:ring-2 focus:ring-indigo-500 ${error ? "border-red-500" : "border-gray-300"
+        className={`w-full border rounded px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 ${error ? "border-red-500" : "border-gray-300"
           }`}
       >
         <option value="">Select {label}</option>

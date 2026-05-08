@@ -21,6 +21,9 @@ import NotFound from "@/components/NotFound";
 import ModulesPage from "@/features/rbac/pages/ModulesPage";
 import OrdersPage from "@/features/orders/pages/OrdersPage";
 import BookingsPage from "@/features/orders/pages/ServiceBookingsPage";
+import SettingsPage from "@/features/settings/pages/SettingsPage";
+import ReportsPage from "@/features/reports/pages/ReportsPage";
+import BlogsPage from "@/features/blogs/pages/BlogsPage";
 
 // Lazy-loaded pages
 // const NotFound = lazy(() => import("../pages/NotFound"));
@@ -89,7 +92,6 @@ const AppRoutes = () => {
               }
             />
 
-
             <Route
               path="/profile"
               element={
@@ -107,7 +109,6 @@ const AppRoutes = () => {
                 </ErrorBoundary>
               }
             />
-
 
             <Route
               path="/catalog"
@@ -169,8 +170,36 @@ const AppRoutes = () => {
                 </ErrorBoundary>
               }
             />
+
+            <Route
+              path="/blogs"
+              element={
+                <ErrorBoundary>
+                  <BlogsPage />
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/reports"
+              element={
+                <ErrorBoundary>
+                  <ReportsPage />
+                </ErrorBoundary>
+              }
+            />
+
+            <Route
+              path="/settings"
+              element={
+                <ErrorBoundary>
+                  <SettingsPage />
+                </ErrorBoundary>
+              }
+            />
           </Route>
         </Route>
+
+
 
         {/* ================= 404 ================= */}
         <Route

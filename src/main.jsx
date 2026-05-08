@@ -17,6 +17,7 @@ import { ServiceProvider } from './context/ServiceContext';
 import { OrderProvider } from './context/OrderContext';
 import { GlobalProvider } from './context/GlobalContext';
 import { BookingProvider } from './context/BookingContext';
+import { BlogProvider } from './context/BlogContext';
 
 
 createRoot(document.getElementById('root')).render(
@@ -37,7 +38,9 @@ createRoot(document.getElementById('root')).render(
                         <ServiceProvider>
                           <OrderProvider>
                             <BookingProvider>
-                              <App />
+                              <BlogProvider>
+                                <App />
+                              </BlogProvider>
                             </BookingProvider>
                           </OrderProvider>
                         </ServiceProvider>
