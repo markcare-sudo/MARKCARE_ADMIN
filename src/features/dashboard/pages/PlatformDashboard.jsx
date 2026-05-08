@@ -2,9 +2,9 @@ import { apiStatusConstants } from "@/utils/api";
 import PlatformDashboardStats from "../components/PlatformDashboardStats";
 import SubscriptionsStats from "../components/SubscriptionStats";
 import useDashboard from "../useDashboard";
-import { Loader } from "@/components/Loader";
-import ApiFailure from "@/components/ui/APIFailure";
+import ApiFailure from "@/components/ui/ApiFailure";
 import ApiEmpty from "@/components/ui/ApiEmpty";
+import { Loader } from "@/components/Loader";
 
 const PlatformDashboard = () => {
 
