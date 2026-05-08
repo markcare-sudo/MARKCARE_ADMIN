@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "@/components/ui/Button";
-import OtpInput from "../components/OtpInput";
 import useAuth from "../useAuth";
 import { useAuthContext } from "@/context/AuthContext";
 import AuthSplitLayout from "@/components/layout/AuthSplitLayout";
 import LOGOS from "@/constants/images";
 import { getAccessToken } from "@/utils/sessionStorage";
+import OTPInput from "../components/OTPInput";
 
 const VerifyLoginOtpPage = () => {
   const location = useLocation();
@@ -169,7 +169,7 @@ const VerifyLoginOtpPage = () => {
         )}
 
         <div className="py-4">
-          <OtpInput
+          <OTPInput
             length={6}
             value={otp}
             onChange={setOtp}

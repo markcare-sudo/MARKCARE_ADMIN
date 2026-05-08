@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-const OtpInput = ({
+const OTPInput = ({
   length = 4,
   value,
   onChange,
@@ -69,15 +69,14 @@ const OtpInput = ({
           onKeyDown={(e) => handleKeyDown(e, index)}
           onPaste={handlePaste}
           className={`w-10 h-10 md:w-12 md:h-12 text-center text-lg font-semibold border-2 rounded-lg transition-all
-          ${
-            error
+          ${error
               ? "border-red-500 focus:ring-red-400"
               : "border-gray-300 focus:ring-indigo-500"
-          } focus:outline-none focus:ring-2`}
+            } focus:outline-none focus:ring-2`}
         />
       ))}
     </div>
   );
 };
 
-export default OtpInput;
+export default OTPInput;
