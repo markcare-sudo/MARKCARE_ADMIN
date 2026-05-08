@@ -26,7 +26,6 @@ apiClient.interceptors.request.use(
   (config) => {
     const token = getAccessToken();
 
-    // 🔑 Attach token
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
