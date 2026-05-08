@@ -242,6 +242,8 @@
 
 
 
+
+
 import { Routes, Route, useLocation, Outlet, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
@@ -286,7 +288,7 @@ const AppRoutes = () => {
   return (
     <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading...</div>}>
       <Routes location={location}>
-        {/* ================= PUBLIC ROUTES ================= */}
+        {/* ================= PUBLIC ROUTES ================== */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/verify-otp" element={<VerifyOtpPage />} />
         <Route path="/select-role" element={<RoleSelection />} />
