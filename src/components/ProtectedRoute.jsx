@@ -23,7 +23,9 @@ const ProtectedRoute = () => {
   }
 
   // ✅ Optional: restrict only platform users (admin side)
+
   if (!user?.is_platform_user) {
+
     return <Navigate to="/unauthorized" replace />;
   }
 

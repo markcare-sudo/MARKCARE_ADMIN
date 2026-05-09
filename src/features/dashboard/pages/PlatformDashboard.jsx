@@ -4,7 +4,8 @@ import SubscriptionsStats from "../components/SubscriptionStats";
 import useDashboard from "../useDashboard";
 import ApiFailure from "@/components/ui/ApiFailure";
 import ApiEmpty from "@/components/ui/ApiEmpty";
-import { Loader } from "@/components/Loader";
+import { Loader } from "@/components/ui/Loader";
+// import { Loader } from "@/components/Loader";
 
 const PlatformDashboard = () => {
 

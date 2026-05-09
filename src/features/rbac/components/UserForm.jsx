@@ -127,7 +127,7 @@ const UserForm = ({ onSuccess, initialData }) => {
           label="User Type"
           value={form.user_type}
           onChange={(e) => handleChange("user_type", e.target.value)}
-          options={["TENANT", "PLATFORM"]}
+          options={["TENANT", "PLATFORM", "CUSTOMER"]}
           disabled={isActionLoading || isSingleLoading}
         />
       </div>
