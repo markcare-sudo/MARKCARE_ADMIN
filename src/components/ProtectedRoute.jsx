@@ -1,16 +1,10 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { getAccessToken } from "@/utils/sessionStorage";
-import { useAuthContext } from "@/context/AuthContext";
+import { getAccessToken, getUserData } from "@/utils/sessionStorage";
 
 const ProtectedRoute = () => {
-  const { user, loading } = useAuthContext();
   const location = useLocation();
   const token = getAccessToken();
-
-  // ⏳ Show loader while auth is being checked
-  if (loading) {
-    return <div className="flex items-center justify-center h-screen">Loading...</div>;
-  }
+  const userData = getUserData();
 
   // ❌ No token → redirect to login
   if (!token) {
@@ -18,13 +12,13 @@ const ProtectedRoute = () => {
   }
 
   // ❌ Token exists but no user (invalid/expired session)
-  if (!user) {
+  if (!userData) {
     return <Navigate to="/login" replace />;
   }
 
   // ✅ Optional: restrict only platform users (admin side)
 
-  if (!user?.is_platform_user) {
+  if (!userData?.is_platform_user) {
 
     return <Navigate to="/unauthorized" replace />;
   }
