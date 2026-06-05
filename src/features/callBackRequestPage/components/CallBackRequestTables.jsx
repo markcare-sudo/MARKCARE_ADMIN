@@ -1,7 +1,7 @@
 import Badge from "@/components/ui/Badge";
 import DataTable from "@/components/ui/DataTable";
 import RowActions from "@/components/ui/RowActions";
-import { useCallBackRequests } from "@/context/CallBackRequestContext";
+import { useCallBackRequests } from "@/context/CallbackRequestContext";
 
 const CallbackRequestsTable = ({ requests = [], onEdit }) => {
     const { deleteRequest } = useCallBackRequests();

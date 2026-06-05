@@ -5,7 +5,7 @@ import Modal from "@/components/ui/Modal";
 import PageHeader from "@/components/ui/PageHeader";
 
 // Context Consumer
-import { useCallBackRequests } from "@/context/CallBackRequestContext";
+import { useCallBackRequests } from "@/context/CallbackRequestContext";
 
 import { Loader } from "@/components/Loader";
 import ApiFailure from "@/components/ui/ApiFailure";
