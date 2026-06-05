@@ -15,6 +15,7 @@ import { GlobalProvider } from './context/GlobalContext';
 import { BookingProvider } from './context/BookingContext';
 import { BlogProvider } from './context/BlogContext';
 import { CallBackRequestProvider } from './context/CallBackRequestContext';
+
 import App from './App.jsx'
 import './index.css'
 import "react-quill/dist/quill.snow.css";
