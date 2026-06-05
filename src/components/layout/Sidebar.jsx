@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import * as Icons from "react-icons/fi";
 import LOGOS from "@/constants/images";
 
@@ -31,11 +31,12 @@ const MENU_ORDER = {
   INVENTORY: 17,
 
   // System
-  BLOGS: 18,
-  REPORTS: 19,
-  AUDIT_LOGS: 20,
-  EMAILS: 21,
-  SETTINGS: 22,
+  CALL_BACK_REQUESTS: 18,
+  BLOGS: 19,
+  REPORTS: 20,
+  AUDIT_LOGS: 21,
+  EMAILS: 22,
+  SETTINGS: 23,
 };
 
 const getModuleIcon = (code) => {
@@ -68,6 +69,7 @@ const getModuleIcon = (code) => {
     INVENTORY: Icons.FiArchive,
 
     // System
+    CALL_BACK_REQUESTS: Icons.FiPhone,
     BLOGS: Icons.FiFileText,
     REPORTS: Icons.FiBarChart2,
     AUDIT_LOGS: Icons.FiClipboard,
@@ -87,6 +89,7 @@ const Sidebar = ({
   const location = useLocation();
   const [openMenus, setOpenMenus] = useState({});
   const profileRef = useRef();
+  const navigate = useNavigate();
 
   // sort recursively
   const sortRecursive = (items) => {
@@ -187,7 +190,7 @@ const Sidebar = ({
       {/* Header */}
       <div className="flex items-center justify-between h-16 px-4 border-b">
         {!collapsed && (
-          <img src={LOGOS.MARKCARE_LOGO} alt="logo" className="h-7" />
+          <img src={LOGOS.MARKCARE_LOGO} alt="logo" onClick={() => navigate('/')} className="h-7 cursor-pointer" />
         )}
         <button onClick={toggleSidebar} className="ml-1.5 cursor-pointer">
           <Icons.FiMenu size={20} />
@@ -195,7 +198,21 @@ const Sidebar = ({
       </div>
 
       {/* Menu */}
-      <nav className="flex-1 overflow-y-auto px-2 py-4">
+      {/* 🛠️ Added styling here to remove the scrollbar bar across all browsers */}
+      <nav
+        className="flex-1 overflow-y-auto px-2 py-4"
+        style={{
+          scrollbarWidth: "none",          /* Firefox */
+          msOverflowStyle: "none",         /* IE and Edge */
+        }}
+      >
+        {/* CSS injection for WebKit engines (Chrome, Safari, Brave) */}
+        <style>{`
+          nav::-webkit-scrollbar {
+            display: none;                 /* WebKit */
+          }
+        `}</style>
+
         {isLoading ? (
           <div className="text-sm text-gray-400">Loading...</div>
         ) : (
