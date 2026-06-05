@@ -14,7 +14,7 @@ import { OrderProvider } from './context/OrderContext';
 import { GlobalProvider } from './context/GlobalContext';
 import { BookingProvider } from './context/BookingContext';
 import { BlogProvider } from './context/BlogContext';
-import { CallbackRequestProvider } from './context/CallBackRequestContext';
+import { CallBackRequestProvider } from './context/CallBackRequestContext';
 
 import App from './App.jsx'
 import './index.css'
@@ -40,9 +40,9 @@ createRoot(document.getElementById('root')).render(
                           <OrderProvider>
                             <BookingProvider>
                               <BlogProvider>
-                                <CallbackRequestProvider>
+                                <CallBackRequestProvider>
                                   <App />
-                                </CallbackRequestProvider>
+                                </CallBackRequestProvider>
                               </BlogProvider>
                             </BookingProvider>
                           </OrderProvider>
