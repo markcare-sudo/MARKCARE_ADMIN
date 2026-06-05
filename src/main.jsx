@@ -6,10 +6,6 @@ import { AuthProvider } from './context/AuthContext';
 import { RolesProvider } from './context/RolesContext';
 import { ModulesProvider } from './context/ModulesContext';
 import { UsersProvider } from './context/UsersContext';
-import App from './App.jsx'
-import './index.css'
-import "react-quill/dist/quill.snow.css";
-import "./styles/global.css";
 import { BrandProvider } from './context/BrandContext';
 import { ProductProvider } from './context/ProductContext';
 import { CategoryProvider } from './context/CategoryContext';
@@ -18,9 +14,12 @@ import { OrderProvider } from './context/OrderContext';
 import { GlobalProvider } from './context/GlobalContext';
 import { BookingProvider } from './context/BookingContext';
 import { BlogProvider } from './context/BlogContext';
-import CallBackRequestsPage from './features/callBackRequestPage/pages/CallBackRequestPage';
 import { CallbackRequestProvider } from './context/CallBackRequestContext';
 
+import App from './App.jsx'
+import './index.css'
+import "react-quill/dist/quill.snow.css";
+import "./styles/global.css";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
