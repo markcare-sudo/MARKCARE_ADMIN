@@ -4,7 +4,7 @@ import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import PageHeader from "@/components/ui/PageHeader";
 
-// Hooks / Context for Callback Requests (Replace with your actual context)
+// Context Consumer
 import { useCallbackRequests } from "@/context/CallbackRequestContext";
 
 import { Loader } from "@/components/Loader";
@@ -14,49 +14,57 @@ import CallbackFilters from "../components/CallBackRequestFilters";
 import CallbackRequestsTable from "../components/CallBackRequestTables";
 import CallbackRequestForm from "../components/CallBackRequestForm";
 
-// Components to be created/adapted for Callback Requests
+// Subcomponents
 // import CallbackFilters from "../components/CallbackFilters";
 // import CallbackRequestsTable from "../components/CallbackRequestsTable";
 // import CallbackRequestForm from "../components/CallbackRequestForm";
 
 const CallBackRequestsPage = () => {
+    // 🛠️ Guardrail fix: Ensure context hook exists and fallback values protect against undefined destructuring
+    const contextValues = useCallbackRequests() || {};
+
     const {
-        requests,
-        fetchRequests,
-        fetchRequest,
-        loading,
-        isError,
-        error
-    } = useCallbackRequests();
+        requests = [],
+        fetchRequests = () => { },
+        fetchRequest = () => { },
+        loading = false,
+        isError = false,
+        error = null
+    } = contextValues;
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    // ✅ 1. PARSE FILTERS FROM URL (Matches your Sequelize indexes/fields)
-    const search = searchParams.get("search") || ""; // Can query product name/email/phone
-    const status = searchParams.get("status") || ""; // NEW, CONTACTED, CLOSED
-    const source = searchParams.get("source") || ""; // WEBSITE, WHATSAPP, PHONE
+    // 1. PARSE FILTERS FROM URL
+    const search = searchParams.get("search") || "";
+    const status = searchParams.get("status") || "";
+    const source = searchParams.get("source") || "";
 
     const filters = useMemo(() => ({ search, status, source }), [search, status, source]);
 
-    const modalType = searchParams.get("modal"); // 'create' or 'edit'
+    const modalType = searchParams.get("modal");
     const editId = searchParams.get("id");
 
     const [selectedRequest, setSelectedRequest] = useState(null);
     const [isFetching, setIsFetching] = useState(false);
 
-    // ✅ 2. API CALL ON FILTER CHANGE
+    // 2. API CALL ON FILTER CHANGE
     useEffect(() => {
         fetchRequests({ search, status, source });
     }, [search, status, source, fetchRequests]);
 
-    // ✅ 3. SYNC MODAL DATA FOR DETAILS/EDITING
+    // 3. SYNC MODAL DATA FOR DETAILS/EDITING
     useEffect(() => {
         if (modalType === "edit" && editId) {
             const loadData = async () => {
                 setIsFetching(true);
-                const data = await fetchRequest(editId);
-                setSelectedRequest(data);
-                setIsFetching(false);
+                try {
+                    const data = await fetchRequest(editId);
+                    setSelectedRequest(data);
+                } catch (err) {
+                    console.error("Error loading specific request profile data", err);
+                } finally {
+                    setIsFetching(false);
+                }
             };
             loadData();
         } else {

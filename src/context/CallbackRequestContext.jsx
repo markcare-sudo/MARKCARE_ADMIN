@@ -17,7 +17,6 @@ export const CallbackRequestProvider = ({ children }) => {
         try {
             setStatus(apiStatusConstants.IN_PROGRESS);
             const res = await callbackRequestsService.getRequests(filters);
-            console.log(res)
             setRequests(res.data.data.data || []);
             setStatus(apiStatusConstants.SUCCESS);
         } catch (err) {
