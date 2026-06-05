@@ -72,7 +72,7 @@ export const CallbackRequestProvider = ({ children }) => {
             requests,
             status,
             loading: status === apiStatusConstants.IN_PROGRESS,
-            isError: status === apiStatusConstants.FAILURE, // ✅ Added for synchronization with your main layout page
+            isError: status === apiStatusConstants.FAILURE,
             fetchRequests,
             fetchRequest,
             createRequest,
