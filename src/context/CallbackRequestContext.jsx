@@ -5,7 +5,7 @@ import { postErrorHandler } from "@/components/ErrorHandler";
 import { apiStatusConstants } from "@/utils/api";
 import { useAuthContext } from "./AuthContext";
 
-const CallBackRequestContext = createContext();
+const CallbackRequestContext = createContext();
 
 export const CallBackRequestProvider = ({ children }) => {
     const { isAuthenticated } = useAuthContext();
@@ -68,7 +68,7 @@ export const CallBackRequestProvider = ({ children }) => {
     }, [isAuthenticated, fetchRequests]);
 
     return (
-        <CallBackRequestContext.Provider value={{
+        <CallbackRequestContext.Provider value={{
             requests,
             status,
             loading: status === apiStatusConstants.IN_PROGRESS,
@@ -80,8 +80,8 @@ export const CallBackRequestProvider = ({ children }) => {
             deleteRequest
         }}>
             {children}
-        </CallBackRequestContext.Provider>
+        </CallbackRequestContext.Provider>
     );
 };
 
-export const useCallBackRequests = () => useContext(CallBackRequestContext);
+export const useCallBackRequests = () => useContext(CallbackRequestContext);
