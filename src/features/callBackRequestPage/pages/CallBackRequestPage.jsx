@@ -5,7 +5,7 @@ import Modal from "@/components/ui/Modal";
 import PageHeader from "@/components/ui/PageHeader";
 
 // Context Consumer
-import { useCallbackRequests } from "@/context/CallbackRequestContext";
+import { useCallBackRequests } from "@/context/CallbackRequestContext";
 
 import { Loader } from "@/components/Loader";
 import ApiFailure from "@/components/ui/ApiFailure";
@@ -21,7 +21,7 @@ import CallbackRequestForm from "../components/CallBackRequestForm";
 
 const CallBackRequestsPage = () => {
     // 🛠️ Guardrail fix: Ensure context hook exists and fallback values protect against undefined destructuring
-    const contextValues = useCallbackRequests() || {};
+    const contextValues = useCallBackRequests() || {};
 
     const {
         requests = [],

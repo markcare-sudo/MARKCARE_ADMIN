@@ -1,10 +1,10 @@
 import Badge from "@/components/ui/Badge";
 import DataTable from "@/components/ui/DataTable";
 import RowActions from "@/components/ui/RowActions";
-import { useCallbackRequests } from "@/context/CallbackRequestContext";
+import { useCallBackRequests } from "@/context/CallbackRequestContext";
 
 const CallbackRequestsTable = ({ requests = [], onEdit }) => {
-    const { deleteRequest } = useCallbackRequests();
+    const { deleteRequest } = useCallBackRequests();
 
     // Helper to style the dynamic status variants
     const getStatusVariant = (status) => {
